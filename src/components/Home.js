@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import firebase from '../config/firebase.js'
+import Button from './button.js'
 
 
 
@@ -8,7 +9,8 @@ export default class Home extends Component {
         super();
         this.state = {
             players : [],
-            user: null
+            user: null,
+            something: "Dom"
         }
     }
 
@@ -28,7 +30,8 @@ export default class Home extends Component {
             }
 
             this.setState({
-                players: newState
+                players: newState,
+                something: "Dom"
             });
         })
 
@@ -45,7 +48,6 @@ export default class Home extends Component {
           <h1>League Table</h1>
           <ul>
               {this.state.players.map((player) => {
-                  console.log(this.state.players);
                   return (
                       <li key={player.playerId}>
                           <h3>{player.playername}</h3>
@@ -54,6 +56,7 @@ export default class Home extends Component {
                   )
               })}
           </ul>
+          <Button name={this.state.something}/>
       </div>
     )
   }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-// import logo from '../logo.svg';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import '../App.css'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
+import inorout from './inorout/InOrOut'
 import Userprofile from './protected/userprofile'
 import { logout } from '../helpers/auth'
 import firebase from '../config/firebase';
@@ -34,17 +34,12 @@ function PublicRoute ({component: Component, authed, ...rest}) {
   )
 }
 
-
-
 class App extends Component {
 
     state = {
         authed: false,
         loading: true,
     }
-
-
-
 
     componentDidMount(){
         this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
@@ -121,7 +116,7 @@ class App extends Component {
                     <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                     <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                     <PrivateRoute authed={this.state.authed} path='/userprofile' component={Userprofile} />
-                    {/* <PrivateRoute authed={this.state.authed} path='/inorout' component={Inorout} /> */}
+                    <PrivateRoute authed={this.state.authed} path='/inorout' component={Inorout} />
                     <Route render={() => <h3>No Match</h3>} />
                   </Switch>
                 </div>
